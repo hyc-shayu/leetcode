@@ -3,7 +3,7 @@ class Solution:
         self.kmp = None
 
     def KPM(self, needle: str):
-        self.kmp = [[0]*256 for _ in range(len(needle))]
+        self.kmp = [[0] * 256 for _ in range(len(needle))]
 
         # 初始化 kmp 第0状态
         for asc in range(256):
@@ -18,7 +18,7 @@ class Solution:
             for asc in range(256):
                 if ord(needle[i]) == asc:
                     # 状态推进
-                    self.kmp[i][asc] = i+1
+                    self.kmp[i][asc] = i + 1
                 else:
                     # 状态回退 到最长重复前缀
                     self.kmp[i][asc] = self.kmp[X][asc]
@@ -41,6 +41,34 @@ class Solution:
 
         return -1
 
+    def KMPOptimize(self, needle: str):
+        tmpDic = {k: 0 for k in needle}
+        self.kmp = [tmpDic.copy() for _ in range(len(needle))]
+        # 初始化 0 状态
+        self.kmp[0][needle[0]] = 1
+
+        X = 0
+        for i in range(1, len(needle)):
+            for k in self.kmp[i]:
+                if k == needle[i]:
+                    self.kmp[i][k] = i+1
+                else:
+                    self.kmp[i][k] = self.kmp[X][k]
+            X = self.kmp[X][needle[i]]
+
+    def kmpStrOptimize(self, haystack: str, needle: str) -> int:
+        lenTxt = len(haystack)
+        lenPat = len(needle)
+        self.KMPOptimize(needle)
+
+        stateIdx = 0
+        for i in range(lenTxt):
+            stateIdx = self.kmp[stateIdx].get(haystack[i], 0)
+            if stateIdx == lenPat:
+                return i - lenPat + 1
+
+        return -1
+
     def strStr(self, haystack: str, needle: str) -> int:
         lenTxt = len(haystack)
         lenPat = len(needle)
@@ -53,7 +81,7 @@ class Solution:
     def sunday(self, txt: str, pat: str) -> int:
         def calShiftMap():
             dic = {}
-            for i in range(len(pat)-1, -1, -1):
+            for i in range(len(pat) - 1, -1, -1):
                 if not dic.get(pat[i]):
                     dic[pat[i]] = len(pat) - i
             return dic
@@ -79,3 +107,4 @@ class Solution:
 if __name__ == '__main__':
     obj = Solution()
     print(obj.strStr('hello', 'll'))
+    print(obj.kmpStrOptimize('aabaacd', 'aac'))
