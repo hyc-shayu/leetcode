@@ -12,4 +12,6 @@ class ListNode:
         return ' '.join(map(str, val_list))
 
     def __str__(self):
-        return f"{self.val} -> {self.next.val if self.next else None}"
+        if self.val:
+            return f"{self.val}{' -> ' + str(self.next) if self.next else ''}"
+        return ''

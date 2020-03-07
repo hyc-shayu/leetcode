@@ -16,22 +16,23 @@ class Solution:
             right = len_nums - 1
 
             while left < right:
-                curSum = nums[i] + nums[left] + nums[right]
-                curDis = abs(target - curSum)
-                if curDis < closest:
-                    result = curSum
-                    closest = curDis
+                cur_sum = nums[i] + nums[left] + nums[right]
+                cur_dis = abs(target - cur_sum)
+                if cur_dis < closest:
+                    result = cur_sum
+                    closest = cur_dis
 
-                if curSum < target:
+                if cur_sum < target:
                     left += 1
-                elif curSum > target:
+                elif cur_sum > target:
                     right -= 1
                 else:
                     return result
         return result
 
+
 if __name__ == "__main__":
     obj = Solution()
-    result = obj.threeSumClosest([1, -1, 2, 4], 1)
-    print(result)
+    result_ = obj.threeSumClosest([1, -1, 2, 4], 1)
+    print(result_)
 

@@ -1,55 +1,43 @@
-# Definition for singly-linked list.
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-
-    def __str__(self):
-        _str = [self.val]
-        next_node = self.next
-        while next_node:
-            _str.append(next_node.val)
-            next_node = next_node.next
-        return ' '.join(map(str, _str))
+from src.tool.struct import ListNode
 
 
 class Solution:
     def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
-        myHead = ListNode(0)
-        myHead.next = head
-        nextNode = myHead
-        l = []
-        while nextNode:
-            l.append(nextNode)
-            if len(l) > n + 1:
-                l.pop(0)
-            nextNode = nextNode.next
+        my_head = ListNode(0)
+        my_head.next = head
+        next_node = my_head
+        tmp_list = []
+        while next_node:
+            tmp_list.append(next_node)
+            if len(tmp_list) > n + 1:
+                tmp_list.pop(0)
+            next_node = next_node.next
 
-        l[0].next = l[1].next
-        return myHead.next
+        tmp_list[0].next = tmp_list[1].next
+        return my_head.next
 
     def removeNthFromEnd1(self, head: ListNode, n: int) -> ListNode:
-        myHead = ListNode(0)
-        myHead.next = head
-        nextNode = myHead
+        my_head = ListNode(0)
+        my_head.next = head
+        next_node = my_head
         # 使用指针加固定长度数组 模拟队列
-        queueLen = n + 1
-        l = [None] * queueLen
+        queue_len = n + 1
+        tmp_list = [None] * queue_len
         cur = 0
-        while nextNode:
-            l[cur % queueLen] = nextNode
-            nextNode = nextNode.next
+        while next_node:
+            tmp_list[cur % queue_len] = next_node
+            next_node = next_node.next
             cur += 1
 
-        l[cur % queueLen].next = l[(cur + 1) % queueLen].next
-        return myHead.next
+        tmp_list[cur % queue_len].next = tmp_list[(cur + 1) % queue_len].next
+        return my_head.next
 
 
 if __name__ == '__main__':
-    head = ListNode(1)
-    head1 = ListNode(2)
-    head.next = head1
-    print(head)
+    node1 = ListNode(1)
+    node2 = ListNode(2)
+    node1.next = node2
+    print(node1)
     s = Solution()
-    res = s.removeNthFromEnd1(head, 2)
+    res = s.removeNthFromEnd1(node1, 2)
     print(res)

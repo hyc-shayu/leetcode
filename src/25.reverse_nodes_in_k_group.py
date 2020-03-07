@@ -4,10 +4,10 @@ from src.tool.test_data import getSortedNodeList
 
 class Solution:
     def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
-        myHead = ListNode(-1)
-        myHead.next = head
+        my_head = ListNode(-1)
+        my_head.next = head
 
-        preHead = myHead
+        pre_head = my_head
         end = head
 
         while end:
@@ -21,25 +21,25 @@ class Solution:
             if count < k or not end:
                 break
 
-            start = preHead.next  # head -> 1
+            start = pre_head.next  # head -> 1
             stop = end.next  # k+1的节点
-            preHead.next = end  # head -> end
+            pre_head.next = end  # head -> end
             pre = start
-            tmpNode = start.next
+            tmp_node = start.next
 
             # 第二个节点开始 指向 前一个节点
-            while tmpNode is not stop:
-                tmpNext = tmpNode.next  # 记录下一个节点
-                tmpNode.next = pre  # 指向前一个节点
-                pre = tmpNode  # 记录当前节点
-                tmpNode = tmpNext  # 下一个节点
+            while tmp_node is not stop:
+                tmp_next = tmp_node.next  # 记录下一个节点
+                tmp_node.next = pre  # 指向前一个节点
+                pre = tmp_node  # 记录当前节点
+                tmp_node = tmp_next  # 下一个节点
 
             # 交换首尾连接处
             start.next = stop
-            preHead = start
+            pre_head = start
             end = stop
 
-        return myHead.next
+        return my_head.next
 
 
 if __name__ == '__main__':

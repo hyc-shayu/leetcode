@@ -1,16 +1,4 @@
-# Definition for singly-linked list.
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-
-    def __str__(self):
-        val_list = [self.val]
-        next_node = self.next
-        while next_node:
-            val_list.append(next_node.val)
-            next_node = next_node.next
-        return ' '.join(map(str, val_list))
+from src.tool.struct import ListNode
 
 
 class Solution:

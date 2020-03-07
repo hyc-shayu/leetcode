@@ -5,23 +5,23 @@ from src.tool.test_data import getNodeList
 class Solution:
     def swapPairs(self, head: ListNode) -> ListNode:
         cur = head
-        tmpHead = ListNode(-1)
-        tmpHead.next = head
-        pre = tmpHead
+        tmp_head = ListNode(-1)
+        tmp_head.next = head
+        pre = tmp_head
         while cur and cur.next:
             pre.next = cur.next
             pre = cur
             right = cur.next
             # cur, cur.next, right.next = right.next, right.next, cur
             cur.next, right.next, cur = right.next, cur, right.next
-        return tmpHead.next
+        return tmp_head.next
 
     def swapPairs1(self, head):
         if head and head.next:
-            nextNode = head.next
-            head.next = self.swapPairs1(nextNode.next)
-            nextNode.next = head
-            return nextNode
+            next_node = head.next
+            head.next = self.swapPairs1(next_node.next)
+            next_node.next = head
+            return next_node
 
         return head
 

@@ -1,16 +1,4 @@
-# Definition for singly-linked list.
-class ListNode:
-    def __init__(self, x):
-        self.val = x
-        self.next = None
-
-    def __str__(self):
-        val_list = [self.val]
-        next_node = self.next
-        while next_node:
-            val_list.append(next_node.val)
-            next_node = next_node.next
-        return ' '.join(map(str, val_list))
+from src.tool.struct import ListNode
 
 
 class Solution:
@@ -60,7 +48,7 @@ class Solution:
         if length == 0:
             return None
 
-        solutionMinHeapify(arr)
+        solution_min_heapify(arr)
         head = cur = arr[0]
 
         while length > 1:
@@ -69,33 +57,33 @@ class Solution:
             else:
                 arr[0] = arr.pop()
                 length -= 1
-            solutionMinHeapify_1(arr, length, 0)
+            solution_min_heapify_1(arr, length, 0)
             cur.next = arr[0]
             cur = arr[0]
 
         return head
 
 
-def solutionMinHeapify(arr):
+def solution_min_heapify(arr):
     length = len(arr)
     for i in reversed(range(length // 2)):
-        solutionMinHeapify_1(arr, length, i)
+        solution_min_heapify_1(arr, length, i)
 
 
-def solutionMinHeapify_1(arr, length, topIndex):
-    leftSon = 2 * topIndex + 1
-    rightSon = 2 * topIndex + 2
+def solution_min_heapify_1(arr, length, top_index):
+    left_son = 2 * top_index + 1
+    right_son = 2 * top_index + 2
 
-    while leftSon < length:
-        minSon = leftSon
-        if rightSon < length and arr[rightSon].val < arr[leftSon].val:
-            minSon = rightSon
-        if arr[minSon].val >= arr[topIndex].val:
+    while left_son < length:
+        min_son = left_son
+        if right_son < length and arr[right_son].val < arr[left_son].val:
+            min_son = right_son
+        if arr[min_son].val >= arr[top_index].val:
             break
-        arr[minSon], arr[topIndex] = arr[topIndex], arr[minSon]
-        topIndex = minSon
-        leftSon = topIndex * 2 + 1
-        rightSon = topIndex * 2 + 2
+        arr[min_son], arr[top_index] = arr[top_index], arr[min_son]
+        top_index = min_son
+        left_son = top_index * 2 + 1
+        right_son = top_index * 2 + 2
 
 
 def heapify(arr):
@@ -106,25 +94,25 @@ def heapify(arr):
 
 def heapify_1(arr, length, i):
     smallest = i
-    leftSon = 2 * smallest + 1
-    rightSon = 2 * smallest + 2
+    left_son = 2 * smallest + 1
+    right_son = 2 * smallest + 2
     # 当交换的节点有叶子节 子树堆化被打破 需要再堆化
-    while leftSon < length:
-        smallerSon = leftSon
-        if rightSon < length and arr[leftSon] < arr[rightSon]:
-            smallerSon = rightSon
+    while left_son < length:
+        smaller_son = left_son
+        if right_son < length and arr[left_son] < arr[right_son]:
+            smaller_son = right_son
 
-        if arr[smallerSon] > arr[smallest]:
-            arr[smallerSon], arr[smallest] = arr[smallest], arr[smallerSon]
-            smallest = smallerSon
+        if arr[smaller_son] > arr[smallest]:
+            arr[smaller_son], arr[smallest] = arr[smallest], arr[smaller_son]
+            smallest = smaller_son
         else:
             break
 
-        leftSon = 2 * smallest + 1
-        rightSon = 2 * smallest + 2
+        left_son = 2 * smallest + 1
+        right_son = 2 * smallest + 2
 
 
-def heapSort(arr):
+def heap_sort(arr):
     heapify(arr)
     length = len(arr)
     for i in range(length - 1):
@@ -152,6 +140,6 @@ if __name__ == '__main__':
     node1.next = node2
     arr0.append(node1)
 
-    head = Solution().mergeKLists(arr0)
+    head1 = Solution().mergeKLists(arr0)
 
-    print(head)
+    print(head1)

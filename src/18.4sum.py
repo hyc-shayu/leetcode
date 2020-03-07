@@ -11,8 +11,8 @@ class Solution:
             i2 = i1 + 1
             while i2 < len(nums) - 2:
                 # 比左右指针循环每次判断要快
-                if not (nums[i1] + nums[i2] + nums[i2 + 1] + nums[i2 + 2] > target
-                        or nums[i1] + nums[i2] + nums[-2] + nums[-1] < target):
+                if (not nums[i1] + nums[i2] + nums[i2 + 1] + nums[i2 + 2] > target and
+                        not nums[i1] + nums[i2] + nums[-2] + nums[-1] < target):
 
                     left = i2 + 1
                     right = len(nums) - 1
@@ -25,14 +25,9 @@ class Solution:
                             right -= 1
 
                         elif tmp_sum > target:
-                            # 剪枝 如果target不在左右指针的区间内，不需要再移动指针了，直接跳出循环
-                            # if nums[i1] + nums[i2] + nums[right] + nums[right - 1] < target:
-                            #     break
                             right -= 1
 
                         else:
-                            # if nums[i1] + nums[i2] + nums[left] + nums[left + 1] > target:
-                            #     break
                             left += 1
 
                         if left > i2 + 1:
