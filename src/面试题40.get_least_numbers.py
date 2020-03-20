@@ -7,35 +7,30 @@ class Solution:
         if not arr or k < 1:
             return []
 
-        # MAX_INT = 1<<31 - 1
-        # heap = [MAX_INT] * k
         heap = arr[:k]
 
         def insert_max_heap(number):
             if number >= heap[0]:
                 return
             heap[0] = number
-            heapfy(0)
+            heapify(0)
 
         def init_max_heap():
             for i in reversed(range(k // 2)):
-                heapfy(i)
+                heapify(i)
 
-        def heapfy(idx):
-            left = idx * 2 + 1
-            if left >= k:
-                return
-            right = left + 1
-            max_idx = idx
-            if heap[left] > heap[max_idx]:
-                max_idx = left
-            if right < k and heap[right] > heap[max_idx]:
-                max_idx = right
-            if max_idx == idx:
-                return
-            heap[idx], heap[max_idx] = heap[max_idx], heap[idx]
-
-            heapfy(max_idx)
+        def heapify(root):
+            while root < k // 2:
+                left = root * 2 + 1
+                right = left + 1
+                if right < k and heap[right] > heap[left]:
+                    greater_son = right
+                else:
+                    greater_son = left
+                if heap[greater_son] < heap[root]:
+                    break
+                heap[root], heap[greater_son] = heap[greater_son], heap[root]
+                root = greater_son
 
         init_max_heap()
 
