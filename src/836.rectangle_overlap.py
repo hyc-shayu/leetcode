@@ -1,3 +1,6 @@
+from typing import List
+
+
 class Solution:
     def isRectangleOverlap(self, rec1: List[int], rec2: List[int]) -> bool:
         # x轴 不重叠的情况, 左界和右界相等也算不重叠
