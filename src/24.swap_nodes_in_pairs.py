@@ -1,5 +1,5 @@
 from src.tool.struct import ListNode
-from src.tool.test_data import getNodeList
+from src.tool.test_data import get_rand_node_list
 
 
 class Solution:
@@ -27,6 +27,6 @@ class Solution:
 
 
 if __name__ == '__main__':
-    node = getNodeList()
+    node = get_rand_node_list()
     print(node.get_list())
     print((Solution().swapPairs1(node)).get_list())

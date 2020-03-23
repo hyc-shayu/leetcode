@@ -1,5 +1,5 @@
 from src.tool.struct import ListNode
-from src.tool.test_data import getSortedNodeList
+from src.tool.test_data import get_sorted_node_list
 
 
 class Solution:
@@ -43,6 +43,6 @@ class Solution:
 
 
 if __name__ == '__main__':
-    node = getSortedNodeList()
+    node = get_sorted_node_list()
     print(node.get_list())
     print((Solution().reverseKGroup(node, 2)).get_list())

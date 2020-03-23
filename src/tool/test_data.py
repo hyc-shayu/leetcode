@@ -1,27 +1,35 @@
 from src.tool.struct import ListNode
 import random
 
-__defaultLen = 5
-__minVal = 1
-__maxVal = 10
+_defaultLen = 5
+_min_val = 1
+_max_val = 10
 
 
-def getNodeList(length=__defaultLen, minVal=__minVal, maxVal=__maxVal):
+def get_node_list(list_):
+    head = ListNode(-1)
+    cur = head
+    for item in list_:
+        cur.next = ListNode(item)
+        cur = cur.next
+    return head.next
+
+
+def get_rand_node_list(length=_defaultLen, min_val=_min_val, max_val=_max_val):
     head = ListNode(-1)
     cur = head
     for i in range(length):
-        cur.next = ListNode(random.randint(minVal, maxVal))
+        cur.next = ListNode(random.randint(min_val, max_val))
         cur = cur.next
     return head.next
 
 
-def getSortedNodeList(length=__defaultLen, minVal=__minVal, maxVal=__maxVal):
-    sortedList = [random.randint(minVal, maxVal) for _ in range(length)]
-    sortedList.sort()
+def get_sorted_node_list(length=_defaultLen, min_val=_min_val, max_val=_max_val):
+    sorted_list = [random.randint(min_val, max_val) for _ in range(length)]
+    sorted_list.sort()
     head = ListNode(-1)
     cur = head
-    for v in sortedList:
+    for v in sorted_list:
         cur.next = ListNode(v)
         cur = cur.next
     return head.next
-
