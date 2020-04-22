@@ -15,3 +15,10 @@ class ListNode:
         if self.val:
             return f"{self.val}{' -> ' + str(self.next) if self.next else ''}"
         return ''
+
+
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
