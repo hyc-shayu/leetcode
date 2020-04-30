@@ -45,23 +45,25 @@ class Solution:
         while idx_l <= idx_r and len(result) < 2:
             idx_m = (idx_l + idx_r) // 2
             mid_val = mountain_arr.get(idx_m)
-            # 左边是升序 山峰在 [idx_m, idx_r]                          idx_m == idx_l的情况
+            # 左边是升序 山峰在 [idx_m, idx_r]                          idx_m == idx_l < idx_r的情况
             if idx_m > idx_l and mountain_arr.get(idx_m - 1) < mid_val or (idx_m == idx_l and
-                                                                           mid_val <= mountain_arr.get(idx_r)):
+                                                                           mid_val < mountain_arr.get(idx_r)):
                 # target在左侧 升序中
                 if mid_val >= target >= left_val:
                     binary_search(idx_l, idx_m)
                 idx_l = idx_m + 1
+                left_val = mid_val
             # 右侧是降序
             else:
                 # target 在右侧降序中
                 if mid_val >= target >= right_val:
                     binary_search(idx_r, idx_m)
                 idx_r = idx_m - 1
+                right_val = mid_val
 
         return min(result) if result else -1
 
 
 if __name__ == '__main__':
-    arr = MountainArray([0, 5, 3, 1])
-    print(Solution().findInMountainArray(1, arr))
+    arr = MountainArray([3, 5, 2])
+    print(Solution().findInMountainArray(2, arr))
